@@ -1,0 +1,37 @@
+{
+  "name": "xpressengine-plugin/multi_language_manage",
+  "description": "This Package is Xpressengine Plugin - MultiLanguageManage plugin.",
+  "keywords": [
+    "xpressengine",
+    "plugin"
+  ],
+  "license": "LGPL-2.1-or-later",
+  "version": "1.0.0",
+  "type": "xpressengine-plugin",
+  "support": {
+    "email": "developers@xpressengine.com"
+  },
+  "authors": [
+    {
+      "name": "XE Developers",
+      "email": "developers@xpressengine.com",
+      "homepage": "https://xpressengine.io",
+      "role": "Developer"
+    }
+  ],
+  "extra": {
+    "xpressengine": {
+      "title": "MultiLanguageManage plugin",
+      "component": {}
+    }
+  },
+  "require": {
+    "xpressengine/xpressengine": "~3.0.3",
+    "phpoffice/phpspreadsheet": "1.8.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Xpressengine\\Plugins\\MultiLanguageManage\\": "src/"
+    }
+  }
+}
