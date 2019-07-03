@@ -14,12 +14,38 @@ class Plugin extends AbstractPlugin
      */
     public function boot()
     {
+        $this->importSettingMenu();
         $this->route();
+    }
+
+    protected function importSettingMenu()
+    {
+        app('xe.register')->push(
+            'settings/menu',
+            'lang.multi_language_manage_index',
+            [
+                'title' => 'multi_language_manage::title',
+                'description' => 'multi_language_manage::desc',
+                'display' => true,
+                'ordering' => 200
+            ]
+        );
     }
 
     protected function route()
     {
+        Route::settings(Plugin::getId(), function () {
+            Route::get('/', [
+                'as' => 'multi_language_manage::index',
+                'uses' => 'MultiLanguageManageController@index',
+                'settings_menu' => 'lang.multi_language_manage_index'
+            ]);
 
+            Route::get('/export', [
+                'as' => 'multi_language_manage::export',
+                'uses' => 'MultiLanguageManageController@export'
+            ]);
+        }, ['namespace' => 'Xpressengine\\Plugins\\MultiLanguageManage\\Controllers']);
     }
 
     /**
@@ -31,7 +57,10 @@ class Plugin extends AbstractPlugin
      */
     public function activate($installedVersion = null)
     {
-        // implement code
+        $folderPath = 'app/public/multi_language_manage';
+        if (file_exists(storage_path($folderPath)) == false) {
+            mkdir(storage_path($folderPath), 0777, true);
+        }
     }
 
     /**
