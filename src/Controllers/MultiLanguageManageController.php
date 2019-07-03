@@ -97,7 +97,7 @@ class MultiLanguageManageController extends Controller
 
         $heads = [
             'namespace',
-            'key'
+            'item'
         ];
         foreach ($locales as $locale => $idx) {
             $heads[] = $locale;
@@ -149,6 +149,13 @@ class MultiLanguageManageController extends Controller
     private function getLangsQuery(Request $request)
     {
         $query = \XeDB::table('translation');
+        if ($value = $request->get('value')) {
+            $valueQuery = \XeDB::table('translation');
+            $valueQuery->where('value', 'like', '%' . $value . '%');
+            $valueIds = $valueQuery->pluck('item')->toArray();
+
+            $query->whereIn('item', $valueIds);
+        }
 
         if ($namespace = $request->get('namespace')) {
             $query->where('namespace', $namespace);
@@ -160,10 +167,6 @@ class MultiLanguageManageController extends Controller
 
         if ($locale = $request->get('locale')) {
             $query->where('locale', $locale);
-        }
-
-        if ($value = $request->get('value')) {
-            $query->where('value', 'like', '%' . $value . '%');
         }
 
         $query->orderBy('namespace', 'asc');
