@@ -111,7 +111,9 @@ class MultiLanguageManageController extends Controller
             $sheet->setCellValue(chr(ord($beginColumn) + $idx) . $beginRow, $head);
         }
 
-        $langs = $this->getLangsQuery($request)->get();
+        $langs = $this->getLangsQuery($request)
+            ->whereIn('locale', $localeConfig)
+            ->get();
 
         $beginColumn = 'A';
         $preItem = '';
