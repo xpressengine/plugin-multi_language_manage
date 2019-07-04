@@ -6,7 +6,7 @@
                     <div class="panel-heading">
                         <div class="pull-right">
                             <button type="button" data-url="{{route('multi_language_manage::export')}}" class="__export_btn xe-btn xe-btn-positive">내보내기</button>
-                            <button type="button" class="xe-btn xe-btn-danger">가져오기</button>
+                            <a href="#" data-url="{{route('multi_language_manage::get_import')}}" class="__import_btn xe-btn xe-btn-danger">가져오기</a>
                         </div>
                     </div>
 
@@ -38,7 +38,6 @@
                                 <label>value</label>
                                 <input type="text" name="value" class="xe-form-control" value="{{\Request::get('value')}}">
                             </div>
-
                         </div>
 
                         <button type="submit" data-url="{{route('multi_language_manage::index')}}" class="__search_btn xe-btn text-btn">검색</button>
@@ -91,5 +90,10 @@
             $(this).closest('form').attr('action', $(this).data('url'));
             $(this).closest('form').submit();
         })
+
+        $('.__import_btn').click(function () {
+            var url = $(this).data('url');
+            window.XE.pageModal(url);
+        });
     })
 </script>

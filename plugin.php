@@ -41,6 +41,15 @@ class Plugin extends AbstractPlugin
                 'settings_menu' => 'lang.multi_language_manage_index'
             ]);
 
+            Route::get('/import', [
+                'as' => 'multi_language_manage::get_import',
+                'uses' => 'MultiLanguageManageController@getImport'
+            ]);
+            Route::post('/upload', [
+                'as' => 'multi_language_manage::post_import',
+                'uses' => 'MultiLanguageManageController@postImport'
+            ]);
+
             Route::get('/export', [
                 'as' => 'multi_language_manage::export',
                 'uses' => 'MultiLanguageManageController@export'
