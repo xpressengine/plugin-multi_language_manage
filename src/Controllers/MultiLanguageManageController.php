@@ -121,6 +121,9 @@ class MultiLanguageManageController extends Controller
             if ($preItem != $lang->item) {
                 $beginRow++;
             }
+            if ($preItem == '') {
+                $preItem = $lang->item;
+            }
 
             $sheet->setCellValue(chr(ord($beginColumn) + 0) . $beginRow, $lang->namespace);
             $sheet->setCellValue(chr(ord($beginColumn) + 1) . $beginRow, $preItem);
