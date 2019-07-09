@@ -22,6 +22,7 @@
   "extra": {
     "xpressengine": {
       "title": "MultiLanguageManage plugin",
+      "icon": "icon.png",
       "component": {}
     }
   },
